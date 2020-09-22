@@ -1,0 +1,48 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+header{
+    display: flex;
+    width: 100vw;
+    margin-top: 55px;
+    align-items: center;
+    flex-direction: column;
+}
+header h1{
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 5px;
+}
+header h3{
+    font-weight: 100;
+    font-size: 35px;
+}
+section{
+    display: flex;
+    justify-content: center;
+}
+.box-login{
+    background: #6C8FB8;
+    margin-top: 40px;
+    width: 380px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+.box-login input{
+    width: 340px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    outline: none;
+}
+.box-login button{
+    background-color: #39385A;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 12px 40px;
+    margin-top: 5px;
+}
