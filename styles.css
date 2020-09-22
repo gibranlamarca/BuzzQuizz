@@ -49,10 +49,43 @@ header h3{
 }
 /*PÁGINA 2*/
 #header-novo-quizz{
-    height: 10%;
+    height: 50px;
     width: 100vw;
     background: #6C8FB8;
     color: white;
     font-weight: bold;
     font-size: 35px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+#section-novo-quizz{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    margin: 50px 100px 0px 100px;
+}
+#div-novo-quizz{
+    background: #7EA6D4;
+    color: white;
+    display: flex;
+    height: 130px;
+    width: 115px;
+    border-radius: 10px;
+    justify-content: center;
+    position: relative;
+    margin: 0 15px 10px 0;
+    text-align: center;
+}
+#div-novo-quizz p{
+    font-weight: bold;
+    padding-top: 30px;
+    line-height:20px;
+}
+#div-novo-quizz ion-icon{
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    font-size: 30px;
+    margin-top: 5px;
 }
