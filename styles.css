@@ -1,7 +1,8 @@
 body{
     font-family: 'Roboto', sans-serif;
 }
-header{
+/*PÁGINA 1*/
+#header-login{
     display: flex;
     width: 100vw;
     margin-top: 55px;
@@ -17,7 +18,7 @@ header h3{
     font-weight: 100;
     font-size: 35px;
 }
-section{
+#section-login{
     display: flex;
     justify-content: center;
 }
@@ -45,4 +46,13 @@ section{
     font-size: 20px;
     padding: 12px 40px;
     margin-top: 5px;
+}
+/*PÁGINA 2*/
+#header-novo-quizz{
+    height: 10%;
+    width: 100vw;
+    background: #6C8FB8;
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
 }
