@@ -89,3 +89,137 @@ header h3{
     font-size: 30px;
     margin-top: 5px;
 }
+/*PÁGINA 3*/
+.section-criacao-quizz{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 53%;
+    margin: 40px auto;
+}
+.criacao-quizz{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 0 auto;
+}
+.criacao-niveis{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 40px auto 0 auto;
+}
+.criacao-titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 40px auto 0 auto;
+}
+.input-titulo{
+    border-radius: 8px;
+    color: #CCCCCC;
+    outline: none;
+    border: 1px solid #cccccc;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 100;
+    padding-left: 10px;
+    width: 100%;
+}
+.container-azul{
+    width: 100%;
+    height: 170px;
+    background: #E3F0FF;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+.icone-mais{
+    color: #6C8FB8;
+    font-size: 28px;
+    text-align: center;
+    cursor: pointer;
+}
+.titulo{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.geral{
+    display:flex;
+    width: 100%;
+}
+.esquerda{
+    width: 50%;
+}
+.direita{
+    width: 50%;
+}
+.box-branca{
+    line-height: 20px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding-left: 5px;
+    width: 100%;
+    margin: 1px 0 3px 0; 
+    font-size: 10px;
+}
+.correta{
+    background: #DAFFD9;
+    line-height: 20px;
+    border-radius: 5px;
+    font-size: 10px;
+    outline: none;
+    border: none;
+    padding-left: 5px;
+    width: 99%;
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+.errada{
+    background: #FFD9D9;
+    line-height: 20px;
+    border-radius: 5px;
+    font-size: 10px;
+    outline: none;
+    border: none;
+    padding-left: 5px;
+    width: 99%;
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+.campo-porcentagem{
+    line-height: 20px;
+    border-radius: 5px;
+    font-size: 10px;
+    outline: none;
+    border: none;
+    padding-left: 5px;
+    width: 99.6%;
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+.descricao{
+    resize:none;
+    font-family: 'Roboto', sans-serif;
+    color: inherit;
+}
+.descricao::placeholder{
+    font-weight: bold;
+}
+.botao-publicar{
+    width: 100%;
+    background: #6C8FB8;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    line-height: 25px;
+    outline: none;
+    border: none;
+    margin-top: 30px;
+    cursor:pointer;
+}
