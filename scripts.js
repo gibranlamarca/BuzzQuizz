@@ -1,6 +1,6 @@
 var perguntas=[];
 var niveis=[];
-
+var idClicada=0;
 
 var token = 0;
 var button = document.querySelector("button");
@@ -31,24 +31,60 @@ function escondeTela(resposta){
     document.querySelector("#header-login").style.display="none";
     document.querySelector("#section-login").style.display="none";
     token = resposta.data.token;
+    pagina2();
 }
 function dadosIncorretos(){
     alert("Usuário de email ou senha incorreto!");
     location.reload();
 }
 /*PÁGINA 2*/
-
-function carregaQuizzes(){
-
+function pagina2(){
+    document.querySelector(".header-novo-quizz").style.display="flex";
+    document.querySelector(".section-novo-quizz").style.display="flex";
+    document.querySelector(".div-novo-quizz").style.display="initial";
+    setTimeout(carregaQuizzes,1000);
 }
+function carregaQuizzes(){
+    var requisicao = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",{headers: {"User-Token": token}});
+    console.log(requisicao);
+    requisicao.then(criaIconeQuizz);
+}
+function criaIconeQuizz(dados){
+    for(var i =0;i<dados.data.length;i++){
+        var icone = document.createElement("div");
+        icone.classList.add("div-novo-quizz-branco");
+        icone.setAttribute("id",dados.data[i].id)
+        icone.setAttribute("onclick","guardaId(this);carregaQuizz()");
+        document.querySelector(".section-novo-quizz").appendChild(icone);
+
+        var titulo = document.createElement("p");
+        titulo.innerText=dados.data[i].title;
+        icone.appendChild(titulo);
+    }
+}
+function guardaId(objeto){
+    idClicada = objeto.id;
+}
+
 /*PÁGINA 3*/
+function pagina3(){
+    document.querySelector(".section-novo-quizz").style.display="none";
+    document.querySelector(".section-criacao-quizz").style.display="initial";
+    criaTitulo();
+    criaPerguntas();
+    criaNiveis();
+}
+function pagina3pt2(){
+    document.querySelector(".section-criacao-quizz").style.display="none";
+    document.querySelector(".section-novo-quizz").style.display="flex";
+    carregaQuizzes();
+}
 function criaTitulo(){
     var inputTitulo = document.createElement("input")
     inputTitulo.classList.add("input-titulo");
     inputTitulo.placeholder="Digite o título do seu quizz";
     document.querySelector(".criacao-titulo").appendChild(inputTitulo);
 }
-criaTitulo();
 function criaPerguntas(){
     var containerAzul = document.createElement("div")
     containerAzul.classList.add("container-azul");
@@ -112,14 +148,12 @@ function criaPerguntas(){
 
     var ionIcon = document.createElement("ion-icon");
     ionIcon.setAttribute("name","add-circle");
-    ionIcon.setAttribute("onclick","limpaPergunta()");
+    ionIcon.setAttribute("onclick","selecionaPerguntas();limpaPergunta()");
     ionIcon.classList.add("icone-mais");
     document.querySelector(".criacao-quizz").appendChild(ionIcon);
 
 
 }
-criaPerguntas();
-
 function criaNiveis(){
     var containerAzulNiveis = document.createElement("div");
     containerAzulNiveis.classList.add("container-azul");
@@ -179,14 +213,12 @@ function criaNiveis(){
 
      var ionIcon = document.createElement("ion-icon");
      ionIcon.setAttribute("name","add-circle");
-     ionIcon.setAttribute("onclick","limpaNivel()");
+     ionIcon.setAttribute("onclick","selecionaNiveis();limpaNivel()");
      ionIcon.classList.add("icone-mais");
      document.querySelector(".criacao-niveis").appendChild(ionIcon);
 
 
 }
-criaNiveis();
-
 function limpaPergunta(){
     var input = document.querySelectorAll(".criacao-quizz input");
     for(index=0;index<input.length;index++){
@@ -203,7 +235,6 @@ function limpaNivel(){
     contadorNivel++;
     document.querySelector(".criacao-niveis .titulo").innerText="Nível "+contadorNivel;
 }
-
 function selecionaPerguntas() {
     var tituloPergunta = document.querySelector(".box-branca").value;
     // tituloPergunta = verificaMaiuscula(tituloPergunta);
@@ -237,7 +268,6 @@ function selecionaPerguntas() {
     var pergunta = {"titulo": tituloPergunta, "respostas": arrayRespostas, "imagens": arrayImagens};
     perguntas.push(pergunta);
 }
-
 function selecionaNiveis() {
     // minimo = verificaEspaco(minimo);
     // minimo = parseInt(minimo);
@@ -260,24 +290,94 @@ function selecionaTitulo(){
     var titulo = document.querySelector(".criacao-titulo input").value;
     return titulo;
 }
-
 function formataQuizz(){
     var titulo = selecionaTitulo();
-    selecionaPerguntas();
-    selecionaNiveis();
      var quizzFormatado = {
           "title": titulo,
           "data": {perguntas, niveis}
       };
-
       postaQuizz(quizzFormatado);
 }
-
 function postaQuizz(quizzFormatado){
     var requisicao = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",quizzFormatado,{headers: {"User-Token": token}});
     requisicao.catch(verificaErro);
 }
-
 function verificaErro(erro){
     console.log(erro.response);
+}
+/*PÁGINA 4*/
+function pagina4(){
+
+}
+function carregaQuizz(){
+    var requisicao = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes",{headers: {"User-Token": token}});
+    requisicao.then(renderizaQuizz);
+}
+function renderizaQuizz(requisicao){
+    document.querySelector(".section-novo-quizz").style.display="none";
+
+    var indiceClicado = 0;
+    for(var i=0;i<requisicao.data.length;i++){
+        if(requisicao.data[i].id==idClicada){
+            indiceClicado=i;
+        }
+    }
+    //vou criar uma função que da shuffle no perguntas
+    // var quantasPerguntas = requisicao.data[indiceClicado].perguntas.length;
+    // var valorTemporario
+    //   for(var i=0;i<quantasPerguntas;i++){//roda as perguntas
+    //     for(var j=0;j<4;j++){//roda as respostas
+    //         var respostaSelecionada = requisicao.data[indiceClicado].data.perguntas.respostas[j];
+    //         if(j==0){
+    //             respostaSelecionada.setAttribute("id","correta");
+    //             var sorteiaIndice = Math.floor(4*Math.random());
+    //             valorTemporario = respostaSelecionada;
+    //             respostaSelecionada = requisicao.data[indiceClicado].data.perguntas.respostas[sorteiaIndice];
+    //             requisicao.data[indiceClicado].data.perguntas.respostas[sorteiaIndice] = valorTemporario;
+    //         }
+    //         else{
+    //             var sorteiaIndice = Math.floor(4*Math.random());
+
+    //         }
+    //     }
+    //   }
+    quantasPerguntas = requisicao.data[indiceClicado].data.perguntas.length;
+    var section = document.querySelector(".centralizar");
+    for(var i=0;i<requisicao.data.length;i++){
+        if(requisicao.data[i].id==idClicada){
+            for(j=0;j<quantasPerguntas;j++){
+
+            section.innerHTML= "<h1>"+requisicao.data[i].title+"</h1><div class='box-azul'><p>"+requisicao.data[i].data.perguntas[j].titulo+"</p></div><ul class='box-imagens'><li class='box-imagens-individual' onclick='limpaHTML();shameOnMe()'><figure><img src="+"'"+requisicao.data[i].data.perguntas[j].imagens[0]+"'"+" alt=''></figure><figcaption class='nome-da-imagem'><span>"+requisicao.data[i].data.perguntas[j].respostas[0]+"</span>"+"</li>"+"<li class='box-imagens-individual' onclick='limpaHTML();shameOnMe()'><figure><img src="+"'"+requisicao.data[i].data.perguntas[j].imagens[1]+"'"+" alt=''></figure><figcaption class='nome-da-imagem'><span>"+requisicao.data[i].data.perguntas[j].respostas[1]+"</span>"+"</li>"+"<li class='box-imagens-individual onclick='limpaHTML();shameOnMe()'><figure><img src="+"'"+requisicao.data[i].data.perguntas[j].imagens[2]+"'"+" alt=''></figure><figcaption class='nome-da-imagem'><span>"+requisicao.data[i].data.perguntas[j].respostas[2]+"</span>"+"</li>"+"<li class='box-imagens-individual' onclick='limpaHTML();shameOnMe()'><figure><img src="+"'"+requisicao.data[i].data.perguntas[j].imagens[3]+"'"+" alt=''></figure><figcaption class='nome-da-imagem'><span>"+requisicao.data[i].data.perguntas[j].respostas[3]+"</span>"+"</li>"+"</ul>";
+
+            }
+        }
+    }
+    //preciso criar uma função e por no onclick de todas essas caixas individuais que limpe o html e passe para a próxima pergunta
+    //pensar na lógica para saber qual vai ser a resposta e a imagem correta. No momento ta sendo sempre o indice 0.
+    //adicionar mais uma função onclick nos li's pra checar se é a correta
+    //criar a página assim ocupou menos linhas, porém ficou muito menos legível, e provavelmente não vou conseguir dar shuffle
+}
+function limpaHTML(){
+    if(j<=quantasPerguntas){
+        //limpa o HTML da section .centralizar -> setar um timeOut para isso acontecer (pra dar pra ver se errou ou acertou)
+        //faz j++
+        //chama a renderizaQuizz de novo, agora com o j atualizado
+    }
+}
+function shameOnMe(){
+    document.querySelector(".centralizar").style.display="none";
+
+    var titulo = document.createElement("h1");
+    titulo.innerText="Pegadinha do malandro! Esse quizz não funciona. Shame on you Gibran";
+    titulo.style.fontSize="35px";
+    titulo.style.textAlign="center";
+    titulo.style.fontWeight="bold";
+    titulo.style.marginTop="30px";
+    document.querySelector("body").appendChild(titulo);
+
+    var imagem = document.createElement("img");
+    imagem.setAttribute("src","https://pbs.twimg.com/media/CltmK7dXIAA6FCO.jpg");
+    imagem.style.marginLeft="25%";
+    document.querySelector("body").appendChild(imagem);
+    
 }

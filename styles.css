@@ -48,7 +48,7 @@ header h3{
     margin-top: 5px;
 }
 /*PÁGINA 2*/
-#header-novo-quizz{
+.header-novo-quizz{
     height: 50px;
     width: 100vw;
     background: #6C8FB8;
@@ -56,19 +56,21 @@ header h3{
     font-weight: bold;
     font-size: 35px;
     padding: 10px;
-    display: flex;
+    display: none;
     align-items: center;
 }
-#section-novo-quizz{
+.section-novo-quizz{
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: none;
     margin: 50px 100px 0px 100px;
 }
-#div-novo-quizz{
-    background: #7EA6D4;
-    color: white;
+.div-novo-quizz-branco{
+    background: white;
+    color: black;
+    box-shadow: 0px 0px 10px #B2B2B2;
     display: flex;
+    cursor: pointer;
     height: 130px;
     width: 115px;
     border-radius: 10px;
@@ -77,12 +79,31 @@ header h3{
     margin: 0 15px 10px 0;
     text-align: center;
 }
-#div-novo-quizz p{
+.div-novo-quizz-branco p{
     font-weight: bold;
     padding-top: 30px;
     line-height:20px;
 }
-#div-novo-quizz ion-icon{
+.div-novo-quizz{
+    background: #7EA6D4;
+    color: white;
+    display: none;
+    height: 130px;
+    width: 115px;
+    cursor: pointer;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 15px 10px 0;
+    text-align: center;
+}
+.div-novo-quizz p{
+    font-weight: bold;
+    padding-top: 30px;
+    line-height:20px;
+}
+.div-novo-quizz ion-icon{
     position: absolute;
     bottom: 20px;
     left: 40px;
@@ -91,7 +112,7 @@ header h3{
 }
 /*PÁGINA 3*/
 .section-criacao-quizz{
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     width: 53%;
@@ -222,4 +243,77 @@ header h3{
     border: none;
     margin-top: 30px;
     cursor:pointer;
+}
+
+.centralizar{
+    width: 64%;
+    height: 100vh;
+    margin: 50px auto 0 auto;
+}
+.centralizar h1{
+    font-size: 35px;
+    font-family: 'Merriweather', serif;
+    margin: 0 13%;
+}
+.centralizar div p{
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+}
+.box-azul{
+    background: #6C8FB8;
+    width: 100%;
+    height: 15%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.box-imagens{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.box-imagens-individual{
+    width: 49.5%;
+    height: 49%;
+    border-radius:5px;
+    position: relative;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+.box-imagens-individual figure{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    top:0;
+    left:0;
+}
+figure img{
+    width:100%;
+    height:100%;
+    border-radius: 5px;
+}
+.nome-da-imagem{
+    width: 100%;
+    height: 29%;
+    position: absolute;
+    bottom:0;
+    left:0;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.nome-da-imagem span{
+    color:#575454;
+    font-weight: bold;
+    font-size: 20px;
 }
